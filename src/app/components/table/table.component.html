@@ -6,7 +6,7 @@
       </button>
    </div>
    <div class="modal-body">
-      <form [formGroup]="userRegistrationForm" (ngSubmit)="submitUserDetails($event)">
+      <form [formGroup]="userRegistrationForm" (ngSubmit)="submitUserDetails()">
       <div *ngIf="errorMsg" class="alert alert-danger">
          {{errorMsg}}
       </div>
@@ -41,7 +41,7 @@
       </form>
    </div>
    <div class="modal-footer">
-      <button type="submit" class="btn btn-outline-dark" (click)="submitUserDetails($event)">Submit</button>
+      <button type="submit" class="btn btn-outline-dark" (click)="submitUserDetails()">Submit</button>
    </div>
 </ng-template>
 <div class="title">
