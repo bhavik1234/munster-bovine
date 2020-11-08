@@ -70,7 +70,7 @@ export class TableComponent implements OnInit {
     this.submitted = true;
     if (this.userRegistrationForm.invalid) {
       this.toast.clear()
-      this.toast.error("Invalid form")
+      this.toast.error("Invalid form");
     } else {
       this.loading = true;
       let user = {
