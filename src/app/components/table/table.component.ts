@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/models/user-model';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -10,8 +11,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class TableComponent implements OnInit {
+  loading: boolean
   collection = [];
-  userData: any = [];
+  userData: User[];
   pagination: any;
   submitted: Boolean = false;
   userRegistrationForm: FormGroup;
@@ -52,9 +54,11 @@ export class TableComponent implements OnInit {
   }
   //Delete user by Id
   deleteUserById(id) {
-    console.log(id)
+    this.loading = true;
     this.userSvc.deleteUserById(id)
       .subscribe(data => {
+        this.loading = false;
+        this.toast.clear()
         this.toast.success("User deleted successfully")
         let pageNumber = 1;
         this.getUserData(pageNumber)
@@ -65,9 +69,10 @@ export class TableComponent implements OnInit {
   submitUserDetails() {
     this.submitted = true;
     if (this.userRegistrationForm.invalid) {
-      console.log("Form invalid")
+      this.toast.clear()
+      this.toast.error("Invalid form")
     } else {
-      console.log(this.userRegistrationForm.get('gender'))
+      this.loading = true;
       let user = {
         name: this.userRegistrationForm.get('name').value,
         gender: this.gender,
@@ -77,11 +82,14 @@ export class TableComponent implements OnInit {
       this.userSvc.addUser(user)
         .subscribe(data => {
           if (data.code == 422) {
+            this.loading = false;
             this.errorMsg = 'Email has already been taken'
           } else {
+            this.loading = false;
             this.errorMsg = '';
             let pageNumber = 1;
             this.getUserData(pageNumber)
+            this.toast.clear()
             this.toast.success("Successfully added user")
             this.userRegistrationForm.reset()
             this.submitted = false;

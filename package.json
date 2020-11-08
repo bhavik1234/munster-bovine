@@ -28,6 +28,7 @@
     "bootstrap": "^4.5.3",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
+    "ngx-loading": "^2.0.1",
     "ngx-pagination": "^5.0.0",
     "ngx-toastr": "^10.0.4",
     "rxjs": "~6.4.0",
