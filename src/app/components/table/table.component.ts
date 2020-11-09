@@ -68,7 +68,13 @@ export class TableComponent implements OnInit {
         this.getUserData(pageNumber)
       })
   }
-
+  getUserList() {
+    this.userSvc.getUserList()
+      .subscribe(data => {
+        this.pagination.page = data.meta.pagination.pages
+        this.getUserData(this.pagination.page)
+      })
+  }
   //Submit user details
   submitUserDetails() {
     this.submitted = true;
@@ -85,7 +91,6 @@ export class TableComponent implements OnInit {
       }
       this.userSvc.addUser(user)
         .subscribe(data => {
-          console.log(data)
           if (data.code == 422) {
             this.loading = false;
             this.errorMsg = 'Email has already been taken'
@@ -94,7 +99,8 @@ export class TableComponent implements OnInit {
             this.loading = false;
             this.errorMsg = '';
             let pageNumber = 1;
-            this.getUserData(pageNumber)
+            this.getUserList()
+            // this.getUserData(pageNumber)
             this.toast.clear()
             this.toast.success("Successfully added user")
             this.userRegistrationForm.reset()
@@ -102,7 +108,6 @@ export class TableComponent implements OnInit {
             this.closeModal()
           }
         })
-
     }
   }
 
