@@ -37,4 +37,10 @@ export class UserService {
       })
       .pipe(map((res) => res));
   }
+
+  getUserList(): Observable<any> {
+    return this.http
+      .get(`${environment.apiUrl}/public-api/users`)
+      .pipe(map((res) => res));
+  }
 }

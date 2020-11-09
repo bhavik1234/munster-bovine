@@ -55,9 +55,9 @@
    <thead>
       <tr>
          <!-- <th scope="col">#</th> -->
-         <th  class="table-row" scope="col" (click)="onSort('name')">Name   <i *ngIf="value == 'name'"    [ngClass]="(sortFlag === 'asc')?'fa fa-angle-down':'fa fa-angle-up'" ></i></th>
-         <th  class="table-row" scope="col" (click)="onSort('gender')">Gender <i *ngIf="value == 'gender'" [ngClass]="(sortFlag === 'asc')?'fa fa-angle-down':'fa fa-angle-up'"></i> </th>
-         <th  class="table-row" scope="col" (click)="onSort('email')">Email <i *ngIf="value == 'email'" [ngClass]="(sortFlag === 'asc')?'fa fa-angle-down':'fa fa-angle-up'"></i> </th>
+         <th  class="table-row" scope="col" (click)="onSort('name')">Name   <i *ngIf="value == 'name'"    [ngClass]="(sortFlag === 'asc')?'fa fa-angle-down':'fa fa-angle-up'" > </i> <i *ngIf="value != 'name'" class="fa fa-sort" ></i></th>
+         <th  class="table-row" scope="col" (click)="onSort('gender')">Gender <i *ngIf="value == 'gender'" [ngClass]="(sortFlag === 'asc')?'fa fa-angle-down':'fa fa-angle-up'"></i> <i *ngIf="value != 'gender'" class="fa fa-sort" ></i> </th>
+         <th  class="table-row" scope="col" (click)="onSort('email')">Email <i *ngIf="value == 'email'" [ngClass]="(sortFlag === 'asc')?'fa fa-angle-down':'fa fa-angle-up'"></i><i *ngIf="value != 'email'" class="fa fa-sort" ></i> </th>
          <th scope="col">Delete</th>
       </tr>
    </thead>

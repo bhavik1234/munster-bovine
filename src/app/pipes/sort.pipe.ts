@@ -10,11 +10,9 @@ export class SortPipe implements PipeTransform {
     if (value.length <= 1) { return value; } // array with only one item
     if (!column || column === '') {
       if (order === 'asc') {
-        console.log("asc")
         return value.sort()
       }
       else {
-        console.log("Des")
         return value.sort().reverse();
       }
     } // sort 1d array
