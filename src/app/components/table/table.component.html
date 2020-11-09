@@ -22,7 +22,7 @@
       <div class="form-group">
          <label>Gender</label>
          <select class="custom-select form-control" (change)="changeGender($event)" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && userRegistrationForm.controls.gender.errors }" >
-         <option value="">Choose your Gender</option>
+         <option value=""  selected>Choose your Gender</option>
          <option value="Male">Male</option>
          <option value="Female">Female</option>
          </select>
@@ -54,7 +54,6 @@
 <table class="table table-striped">
    <thead>
       <tr>
-         <!-- <th scope="col">#</th> -->
          <th  class="table-row" scope="col" (click)="onSort('name')">Name   <i *ngIf="value == 'name'"    [ngClass]="(sortFlag === 'asc')?'fa fa-angle-down':'fa fa-angle-up'" > </i> <i *ngIf="value != 'name'" class="fa fa-sort" ></i></th>
          <th  class="table-row" scope="col" (click)="onSort('gender')">Gender <i *ngIf="value == 'gender'" [ngClass]="(sortFlag === 'asc')?'fa fa-angle-down':'fa fa-angle-up'"></i> <i *ngIf="value != 'gender'" class="fa fa-sort" ></i> </th>
          <th  class="table-row" scope="col" (click)="onSort('email')">Email <i *ngIf="value == 'email'" [ngClass]="(sortFlag === 'asc')?'fa fa-angle-down':'fa fa-angle-up'"></i><i *ngIf="value != 'email'" class="fa fa-sort" ></i> </th>
@@ -63,7 +62,6 @@
    </thead>
    <tbody *ngIf="userData && pagination">
       <tr *ngFor="let user of userData  | paginate: { itemsPerPage: pagination.limit, currentPage: pagination.page,totalItems:pagination.total }| sort:sortFlag:value ">
-         <!-- <th scope="row">{{ user.id }}</th> -->
          <td>{{ user.name }} </td>
          <td>{{ user.gender  }}</td>
          <td>{{ user.email }}</td>

@@ -56,6 +56,7 @@ export class TableComponent implements OnInit {
         })
       })
   }
+
   //Delete user by Id
   deleteUserById(id) {
     this.loading = true;
@@ -98,7 +99,6 @@ export class TableComponent implements OnInit {
             this.value = '';
             this.loading = false;
             this.errorMsg = '';
-            let pageNumber = 1;
             this.getUserList()
             // this.getUserData(pageNumber)
             this.toast.clear()
