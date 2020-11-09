@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user-model';
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -19,6 +20,8 @@ export class TableComponent implements OnInit {
   userRegistrationForm: FormGroup;
   gender = ['Male', 'Female'];
   errorMsg: any;
+  sortFlag = 'desc'
+  value: any = 'name';
 
   constructor(private userSvc: UserService,
     private modalService: NgbModal,
@@ -37,6 +40,7 @@ export class TableComponent implements OnInit {
 
   //Get user data by page number
   getUserData(pageNumber: Number) {
+    this.value = ''
     this.userSvc.getUserDataByPage(pageNumber)
       .subscribe(res => {
         this.userData = []
@@ -81,10 +85,12 @@ export class TableComponent implements OnInit {
       }
       this.userSvc.addUser(user)
         .subscribe(data => {
+          console.log(data)
           if (data.code == 422) {
             this.loading = false;
             this.errorMsg = 'Email has already been taken'
           } else {
+            this.value = '';
             this.loading = false;
             this.errorMsg = '';
             let pageNumber = 1;
@@ -111,6 +117,15 @@ export class TableComponent implements OnInit {
   // Getter method to access formcontrols
   get getGender() {
     return this.userRegistrationForm.get('gender');
+  }
+  //Sort
+  onSort(value) {
+    if (this.sortFlag == 'asc') {
+      this.sortFlag = 'desc'
+    } else {
+      this.sortFlag = 'asc'
+    }
+    this.value = value
   }
 
   //Open modal
